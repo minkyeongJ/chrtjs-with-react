@@ -11,6 +11,16 @@ import {
   LineElement,
 } from "chart.js";
 import { Pie, Bar, Line } from "react-chartjs-2";
+import AreaChart from "./AreaChart";
+import BubbleChart from "./BubbleChart";
+import MixedChart from "./MixedChart";
+import PolarAreaChart from "./PolarAreaChart";
+import RadarChart from "./RadarChart";
+import ScatterChart from "./ScatterChart";
+import ChartCommonFeaturesComparison from "./Options";
+import AttendanceManagementSystem from "./Company";
+import OlympicAthleteStats from "./Olympic";
+import PersonalityCareerAssessment from "./MBTI";
 
 ChartJS.register(
   ArcElement,
@@ -34,11 +44,29 @@ const data = {
     },
   ],
 };
-
+//4.2.1. Area Chart
+// 4.2.2. Bar Chart
+// 4.2.3. Bubble Chart
+// 4.2.4. Doughnut and Pie Charts
+// 4.2.5. Line Chart
+// 4.2.6. Mixed Chart Types
+// 4.2.7. Polar Area Chart
+// 4.2.8. Radar Chart
+// 4.2.9. Scatter Chart
 const charts = [
-  { id: "donut", name: "도넛 차트" },
+  { id: "area", name: "면적 차트" },
   { id: "bar", name: "막대 차트" },
+  { id: "bubble", name: "버블 차트" },
+  { id: "donut", name: "도넛 차트" },
   { id: "line", name: "선 차트" },
+  { id: "mixed", name: "혼합 차트" },
+  { id: "polar", name: "극좌표 차트" },
+  { id: "radar", name: "레이더 차트" },
+  { id: "scatter", name: "산포 차트" },
+  { id: "options", name: "옵션" },
+  { id: "company", name: "근태관리시스템" },
+  { id: "olympic", name: "올림픽 선수 능력치" },
+  { id: "mbti", name: "MBTI 성격 유형과 적성검사 결과" },
 ];
 
 const DonutChart = () => <Pie data={data} options={{ cutout: "50%" }} />;
@@ -120,6 +148,9 @@ export default function Layout() {
           {selectedChart === "line" &&
             "선 차트는 시간에 따른 데이터의 변화나 추세를 보여주는 데 효과적입니다. 데이터 포인트를 선으로 연결하여 연속적인 변화를 표현합니다."}
         </p>
+        <div>
+          <input type="radio" value={"선 추가"} />
+        </div>
         <div className="bg-gray-800 text-white p-4 rounded-lg">
           <pre className="whitespace-pre-wrap">
             {selectedChart === "donut" &&
@@ -214,15 +245,25 @@ const LineChart = () => (
 );
             `}
           </pre>
+          {selectedChart === "options" && <ChartCommonFeaturesComparison />}
+          {selectedChart === "company" && <AttendanceManagementSystem />}
+          {selectedChart === "olympic" && <OlympicAthleteStats />}
+          {selectedChart === "mbti" && <PersonalityCareerAssessment />}
         </div>
       </div>
 
       {/* 오른쪽 차트 영역 */}
       <div className="w-1/3 bg-white shadow-md p-4">
         <h2 className="text-xl font-semibold mb-4">차트 미리보기</h2>
-        {selectedChart === "donut" && <DonutChart />}
+        {selectedChart === "area" && <AreaChart />}
         {selectedChart === "bar" && <BarChart />}
+        {selectedChart === "bubble" && <BubbleChart />}
+        {selectedChart === "donut" && <DonutChart />}
         {selectedChart === "line" && <LineChart />}
+        {selectedChart === "mixed" && <MixedChart />}
+        {selectedChart === "polar" && <PolarAreaChart />}
+        {selectedChart === "radar" && <RadarChart />}
+        {selectedChart === "scatter" && <ScatterChart />}
       </div>
     </div>
   );
